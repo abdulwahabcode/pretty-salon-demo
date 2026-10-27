@@ -1,0 +1,22 @@
+name: Rename to index
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  rename:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rename file to index.html
+        run: |
+          if [ -f pretty-salon-website.html ]; then
+            git config user.name "abdulwahabcode"
+            git config user.email "abdulwahabcode@users.noreply.github.com"
+            git mv pretty-salon-website.html index.html
+            git commit -m "Rename pretty-salon-website.html to index.html"
+            git push
+          else
+            echo "Already renamed"
+          fi
